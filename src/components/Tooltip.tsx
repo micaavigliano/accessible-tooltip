@@ -19,33 +19,43 @@ const Tooltip: React.FC<TooltipProps> = ({ text, children, direction, id }) => {
     setShowTooltip(false);
   };
 
+  const handleOnFocus = () => {
+    setShowTooltip(true)
+  }
+
+  const handleOnBlur = () => {
+    setShowTooltip(false)
+  }
+
   return (
     <div
       className="relative inline-block justify-center text-center"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      onFocus={handleOnFocus}
+      onBlur={handleOnBlur}
     >
       {showTooltip && (
         <div
           className={`${styles.tooltip} ${
             direction === "top"
-              ? "bottom-[calc(100%+1px)] transform translate-x-[-60%] mb-2"
+              ? "bottom-[calc(100%+1px)] left-10 transform translate-x-[-60%] mb-2"
               : ""
           }
           ${
             direction === "bottom"
-              ? "top-[calc(100%+1px)] transform translate-x-[-60%] mt-2"
+              ? "top-[calc(100%+1px)] left-10 transform translate-x-[-60%] mt-2"
               : ""
           }
           ${
             direction === "left"
-              ? "-left-40 top-1/2 transform -translate-y-1/2"
+              ? "-left-24 top-1/2 transform -translate-y-1/2"
               : ""
           }
           ${
             direction === "right"
-              ? "-right-full top-1/2 transform -translate-y-1/2"
-              : "ml-20"
+              ? "-right-24 top-1/2 transform -translate-y-1/2"
+              : ""
           }`}
           data-placement={direction}
           role="tooltip"
