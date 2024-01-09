@@ -1,3 +1,0 @@
-.tooltip {
-  @apply bg-black text-white text-center rounded p-3 absolute z-10 transition-opacity duration-300 ease-in-out w-fit
-}

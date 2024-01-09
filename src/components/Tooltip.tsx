@@ -1,5 +1,4 @@
 import React, { useState, ReactNode } from "react";
-import styles from "./tooltip.module.css";
 
 interface TooltipProps {
   text: string;
@@ -40,7 +39,7 @@ const Tooltip: React.FC<TooltipProps> = ({ text, children, direction, id }) => {
     >
       {showTooltip && (
         <div
-          className={`${styles.tooltip} ${
+          className={`bg-black text-white text-center rounded p-3 absolute z-10 transition-opacity duration-300 ease-in-out w-fit ${
             direction === "top"
               ? "bottom-[calc(100%+1px)] left-10 transform translate-x-[-60%] mb-2"
               : ""
