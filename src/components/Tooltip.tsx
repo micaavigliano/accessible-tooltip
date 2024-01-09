@@ -39,7 +39,7 @@ const Tooltip: React.FC<TooltipProps> = ({ text, children, direction, id }) => {
     >
       {showTooltip && (
         <div
-          className={`bg-black text-white text-center rounded p-3 absolute z-10 transition-opacity duration-300 ease-in-out w-fit ${
+          className={`bg-black text-white text-center rounded p-3 absolute z-10 transition-opacity duration-300 ease-in-out w-fit outline outline-offset-0 ${
             direction === "top"
               ? "bottom-[calc(100%+1px)] left-10 transform translate-x-[-60%] mb-2"
               : ""
@@ -51,12 +51,12 @@ const Tooltip: React.FC<TooltipProps> = ({ text, children, direction, id }) => {
           }
           ${
             direction === "left"
-              ? "-left-[calc(100%+130px)] top-1/2 transform -translate-y-1/2"
+              ? "-left-100 top-1/2 transform -translate-y-1/2 mr-2"
               : ""
           }
           ${
             direction === "right"
-              ? `-right-[calc(100%+130px)] top-1/2 transform -translate-y-1/2`
+              ? "-right-100 top-1/2 transform -translate-y-1/2 ml-2"
               : ""
           }`}
           data-placement={direction}
@@ -66,18 +66,6 @@ const Tooltip: React.FC<TooltipProps> = ({ text, children, direction, id }) => {
           style={getTooltipStyle()}
         >
           {text}
-          {direction === "top" && (
-            <div className="absolute w-3 h-3 bg-black transform rotate-45 -bottom-1 left-1/2 -translate-x-1/2"></div>
-          )}
-          {direction === "bottom" && (
-            <div className="absolute w-3 h-3 bg-black transform rotate-45 -top-1 left-1/2 -translate-x-1/2"></div>
-          )}
-          {direction === "left" && (
-            <div className="absolute w-3 h-3 bg-black transform rotate-45 -right-1 top-1/2 -translate-y-1/2"></div>
-          )}
-          {direction === "right" && (
-            <div className="absolute w-3 h-3 bg-black transform rotate-45 -left-1 top-1/2 -translate-y-1/2"></div>
-          )}
         </div>
       )}
       {children}

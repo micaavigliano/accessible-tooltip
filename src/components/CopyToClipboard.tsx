@@ -43,7 +43,7 @@ const CopyToClipboard: React.FC<ICopyToClipboard> = ({ text, type }) => {
           placeholder="Escribí algo!"
         />
       )}
-      <Tooltip text={copyText} direction={"top"} id={"copyid"}>
+      <Tooltip text={copyText} direction={"bottom"} id={"copyid"}>
         <button onClick={handleCopyText} aria-labelledby="copyid">
           <ContentCopy />
         </button>
