@@ -11,29 +11,32 @@ interface TooltipProps {
 const Tooltip: React.FC<TooltipProps> = ({ text, children, direction, id }) => {
   const [showTooltip, setShowTooltip] = useState<boolean>(false);
 
-  const handleMouseEnter = () => {
+  const tooltipOn = () => {
     setShowTooltip(true);
   };
 
-  const handleMouseLeave = () => {
+  const tooltipOff = () => {
     setShowTooltip(false);
   };
 
-  const handleOnFocus = () => {
-    setShowTooltip(true)
-  }
+  const getTooltipStyle = () => {
+    const tooltipStyle = {
+      [direction === "left" ? "right" : "left"]: "100%",
+      [direction === "top" || direction === "bottom"
+        ? "marginLeft"
+        : "marginTop"]: "7%",
+    };
 
-  const handleOnBlur = () => {
-    setShowTooltip(false)
-  }
+    return tooltipStyle;
+  };
 
   return (
     <div
       className="relative inline-block justify-center text-center"
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      onFocus={handleOnFocus}
-      onBlur={handleOnBlur}
+      onMouseEnter={tooltipOn}
+      onMouseLeave={tooltipOff}
+      onFocus={tooltipOn}
+      onBlur={tooltipOff}
     >
       {showTooltip && (
         <div
@@ -49,18 +52,19 @@ const Tooltip: React.FC<TooltipProps> = ({ text, children, direction, id }) => {
           }
           ${
             direction === "left"
-              ? "-left-24 top-1/2 transform -translate-y-1/2"
+              ? "-left-[calc(100%+130px)] top-1/2 transform -translate-y-1/2"
               : ""
           }
           ${
             direction === "right"
-              ? "-right-24 top-1/2 transform -translate-y-1/2"
+              ? `-right-[calc(100%+130px)] top-1/2 transform -translate-y-1/2`
               : ""
           }`}
           data-placement={direction}
           role="tooltip"
           aria-hidden="true"
           id={id}
+          style={getTooltipStyle()}
         >
           {text}
           {direction === "top" && (
