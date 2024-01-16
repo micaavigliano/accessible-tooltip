@@ -1,4 +1,4 @@
-import React, { useState, ReactNode } from "react";
+import React, { useState, ReactNode, useEffect } from "react";
 
 interface TooltipProps {
   text: string;
@@ -18,6 +18,12 @@ const Tooltip: React.FC<TooltipProps> = ({ text, children, direction, id }) => {
     setShowTooltip(false);
   };
 
+  const closeTooltip = (ev: KeyboardEvent) => {
+    if (ev.key === "Escape") {
+      setShowTooltip(false);
+    }
+};
+
   const getTooltipStyle = () => {
     const tooltipStyle = {
       [direction === "left" ? "right" : "left"]: "100%",
@@ -28,6 +34,14 @@ const Tooltip: React.FC<TooltipProps> = ({ text, children, direction, id }) => {
 
     return tooltipStyle;
   };
+
+  useEffect(() => {
+    document.addEventListener("keydown", closeTooltip);
+
+    return () => {
+      document.removeEventListener("keydown", closeTooltip);
+    };
+  }, []);
 
   return (
     <div
